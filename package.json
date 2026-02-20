@@ -1,0 +1,30 @@
+{
+  "name": "svg-world-maps",
+  "version": "0.0.1",
+  "description": "World map SVG for any JavaScript framework",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "svg",
+    "maps",
+    "world-maps",
+    "svg-map",
+    "afghanistan",
+    "country-maps"
+  ],
+  "author": "Homayoun Mohammadi",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "rimraf": "^6.1.3",
+    "typescript": "^5.9.3"
+  }
+}
