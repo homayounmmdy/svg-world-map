@@ -1,6 +1,6 @@
 {
   "name": "svg-world-maps",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "World map SVG for any JavaScript framework",
   "type": "module",
   "main": "dist/index.js",
