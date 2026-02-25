@@ -1,5 +1,19 @@
-import type {MapData, MapOptions, MapRegion, MapType} from "./types";
+import type {MapData, MapOptions, MapRegion, MapType, PathData} from "./types";
 import {DEFAULT_MAP_OPTIONS, MAP_DATA_REGISTRY, SVG_VIEWPORT_CONFIGS} from "./config";
+
+/**
+ * Type guard to check if region has multiple paths
+ */
+const hasMultiplePaths = (region: MapRegion): region is MapRegion & { paths: PathData[] } => {
+    return 'paths' in region && Array.isArray(region.paths);
+};
+
+/**
+ * Type guard to check if region has a single path
+ */
+const hasSinglePath = (region: MapRegion): region is MapRegion & { path: string } => {
+    return 'path' in region && typeof region.path === 'string';
+};
 
 /**
  * Extracts regions from map data based on map type
@@ -43,9 +57,9 @@ const generateRegionPaths = (mapData: MapData, options: MapOptions = {}): string
         return regions
             .map((region: MapRegion) => {
                 // Handle regions with multiple paths (like Angola)
-                if (region.paths) {
+                if (hasMultiplePaths(region)) {
                     return region.paths
-                        .map((pathData: any, index: number) => {
+                        .map((pathData: PathData, index: number) => {
                             // First path gets the full attributes
                             if (index === 0) {
                                 return `<path 
@@ -68,6 +82,7 @@ const generateRegionPaths = (mapData: MapData, options: MapOptions = {}): string
                 }
 
                 // Handle single path regions
+                if (hasSinglePath(region)) {
                 return `<path 
                 d="${region.path}" 
                 id="${region.code}"
@@ -75,7 +90,13 @@ const generateRegionPaths = (mapData: MapData, options: MapOptions = {}): string
                 fill="${mergedOptions.background}"
                 stroke="${mergedOptions.borders}"
             />`;
+                }
+
+                // This should never happen with proper typing, but just in case
+                console.warn(`Region has no valid path data`, region);
+                return '';
             })
+            .filter(Boolean) // Remove empty strings
             .join('');
     } catch (error) {
         console.error('Error generating region paths:', error);
@@ -119,7 +140,7 @@ export const createMap = (mapType: MapType, options: MapOptions = {}): string =>
     style="${viewportConfig.style}"
     viewBox="${mapData.viewBox}"
     preserveAspectRatio="xMidYMid meet">
-        ${generateRegionPaths(mapData, options)}
+        ${generateRegionPaths(mapData as MapData, options)}
   </svg>`;
 };
 

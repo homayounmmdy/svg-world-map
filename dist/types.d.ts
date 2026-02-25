@@ -22,18 +22,22 @@ export type PathData = {
 };
 /**
  * Represents a geographic region (state or country) within a map
- * Can have either a single path or multiple paths
+ * Can have either a single path OR multiple paths, but not both
  */
 export type MapRegion = {
     /** Unique identifier code for the region (e.g., 'AF' for Afghanistan) */
     code: string;
     /** Display name of the region (e.g., 'Angola') */
     name: string;
+} & ({
     /** Single SVG path for simple regions */
-    path?: string;
+    path: string;
+    paths?: never;
+} | {
     /** Multiple SVG paths for complex regions (islands, territories, etc.) */
-    paths?: PathData[];
-};
+    paths: PathData[];
+    path?: never;
+});
 /**
  * Structure of map data containing either states or countries
  */

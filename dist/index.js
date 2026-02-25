@@ -1,5 +1,17 @@
 import { DEFAULT_MAP_OPTIONS, MAP_DATA_REGISTRY, SVG_VIEWPORT_CONFIGS } from "./config";
 /**
+ * Type guard to check if region has multiple paths
+ */
+const hasMultiplePaths = (region) => {
+    return 'paths' in region && Array.isArray(region.paths);
+};
+/**
+ * Type guard to check if region has a single path
+ */
+const hasSinglePath = (region) => {
+    return 'path' in region && typeof region.path === 'string';
+};
+/**
  * Extracts regions from map data based on map type
  * @param mapData - The map data containing regions
  * @returns Array of map regions (either states or countries)
@@ -36,7 +48,7 @@ const generateRegionPaths = (mapData, options = {}) => {
         return regions
             .map((region) => {
             // Handle regions with multiple paths (like Angola)
-            if (region.paths) {
+            if (hasMultiplePaths(region)) {
                 return region.paths
                     .map((pathData, index) => {
                     // First path gets the full attributes
@@ -50,19 +62,30 @@ const generateRegionPaths = (mapData, options = {}) => {
                             />`;
                     }
                     // Additional paths just get the d attribute
-                    return `<path d="${pathData.d}" />`;
+                    return `<path 
+                                d="${pathData.d}" 
+                                id="${region.code}"
+                                fill="${mergedOptions.background}"
+                                stroke="${mergedOptions.borders}"
+                                />`;
                 })
                     .join('');
             }
             // Handle single path regions
-            return `<path 
+            if (hasSinglePath(region)) {
+                return `<path 
                 d="${region.path}" 
-          id="${region.code}"
-          name="${region.name}"
+                id="${region.code}"
+                name="${region.name}"
                 fill="${mergedOptions.background}"
                 stroke="${mergedOptions.borders}"
             />`;
+            }
+            // This should never happen with proper typing, but just in case
+            console.warn(`Region has no valid path data`, region);
+            return '';
         })
+            .filter(Boolean) // Remove empty strings
             .join('');
     }
     catch (error) {
