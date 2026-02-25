@@ -1,0 +1,1 @@
+{"version":3,"file":"World.js","sourceRoot":"","sources":["../../src/maps/World.ts"],"names":[],"mappings":"AAAA,MAAM,KAAK,GAAG;IACV,IAAI,EAAE,OAAO;IACb,IAAI,EAAE,OAAO;IACb,OAAO,EAAE,cAAc;IACvB,SAAS,EAAE;QACP;YACI,IAAI,EAAE,IAAI;YACV,IAAI,EAAE,aAAa;YACnB,IAAI,EAAE,ohBAAohB;SAC7hB;KACJ;CACJ,CAAA;AAED,eAAe,KAAK,CAAA"}
