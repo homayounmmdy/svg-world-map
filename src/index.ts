@@ -2,30 +2,21 @@ import type {MapData, MapOptions, MapRegion, MapType} from "./types";
 import {DEFAULT_MAP_OPTIONS, MAP_DATA_REGISTRY, SVG_VIEWPORT_CONFIGS} from "./config";
 
 /**
- * Checks if the given map data represents a country-level map (with states)
- * @param mapData - The map data to check
- * @returns True if the map has states, false if it has countries
- */
-const isCountryMap = (mapData: MapData): boolean => {
-    return 'states' in mapData;
-};
-
-/**
  * Extracts regions from map data based on map type
  * @param mapData - The map data containing regions
  * @returns Array of map regions (either states or countries)
- * @throws {Error} If map data contains neither states nor countries
+ * @throws {Error} If map data contains no regions
  */
 const extractRegions = (mapData: MapData): MapRegion[] => {
-    if (isCountryMap(mapData) && mapData.states) {
+    if (mapData.countries && mapData.countries.length > 0) {
+        return mapData.countries;
+    }
+    if (mapData.states && mapData.states.length > 0) {
         return mapData.states;
     }
 
-    if (mapData.countries) {
-        return mapData.countries;
-    }
-
-    throw new Error('Invalid map data: missing both states and countries');
+    console.error('Map data structure:', mapData);
+    throw new Error('Invalid map data: missing both states and countries arrays');
 };
 
 /**
@@ -39,22 +30,57 @@ const generateRegionPaths = (mapData: MapData, options: MapOptions = {}): string
         ...DEFAULT_MAP_OPTIONS,
         ...options
     };
+    const regions = mapData.states || mapData.countries || [];
 
-    const regions = extractRegions(mapData);
+    try {
+        const regions = extractRegions(mapData);
 
-    return regions
-        .map((region: MapRegion) => {
-            return `
-        <path 
-          d="${region.path}" 
-          id="${region.code}"
-          name="${region.name}"
-          fill="${mergedOptions.background}"
-          stroke="${mergedOptions.borders}"
-        />
-      `;
-        })
-        .join('');
+        if (regions.length === 0) {
+            console.warn('No regions found in map data');
+            return '';
+        }
+
+        return regions
+            .map((region: MapRegion) => {
+                // Handle regions with multiple paths (like Angola)
+                if (region.paths) {
+                    return region.paths
+                        .map((pathData: any, index: number) => {
+                            // First path gets the full attributes
+                            if (index === 0) {
+                                return `<path 
+                                d="${pathData.d}" 
+                                id="${region.code}"
+                                name="${region.name}"
+                                fill="${mergedOptions.background}"
+                                stroke="${mergedOptions.borders}"
+                            />`;
+                            }
+                            // Additional paths just get the d attribute
+                            return `<path 
+                                d="${pathData.d}" 
+                                id="${region.code}"
+                                fill="${mergedOptions.background}"
+                                stroke="${mergedOptions.borders}"
+                                />`;
+                        })
+                        .join('');
+                }
+
+                // Handle single path regions
+                return `<path 
+                d="${region.path}" 
+                id="${region.code}"
+                name="${region.name}"
+                fill="${mergedOptions.background}"
+                stroke="${mergedOptions.borders}"
+            />`;
+            })
+            .join('');
+    } catch (error) {
+        console.error('Error generating region paths:', error);
+        throw error;
+    }
 };
 
 /**

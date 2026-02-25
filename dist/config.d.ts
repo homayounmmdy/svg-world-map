@@ -17,11 +17,19 @@ export declare const MAP_DATA_REGISTRY: {
         name: string;
         code: string;
         viewBox: string;
-        countries: {
+        countries: ({
             code: string;
             name: string;
             path: string;
-        }[];
+            paths?: never;
+        } | {
+            code: string;
+            name: string;
+            paths: {
+                d: string;
+            }[];
+            path?: never;
+        })[];
     };
 };
 /**
