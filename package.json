@@ -31,6 +31,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/homayounmmdy/svg-world-map.git"
-  }
+    "url": "git+https://github.com/homayounmmdy/svg-world-maps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/homayounmmdy/svg-world-maps/issues"
+  },
+  "homepage": "https://github.com/homayounmmdy/svg-world-maps#readme"
 }
