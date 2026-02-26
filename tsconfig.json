@@ -2,9 +2,12 @@
   "compilerOptions": {
     "outDir": "./dist",
     "target": "ES2020",
-    "module": "ES2020",  // Changed from ESNext
-    "moduleResolution": "node",  // Changed from bundler
-    "types": [],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": [
+      "node"
+    ],
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
@@ -17,7 +20,14 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "rootDir": "./src"
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "scripts"
+  ]
 }

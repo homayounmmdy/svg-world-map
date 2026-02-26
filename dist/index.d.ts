@@ -1,8 +1,11 @@
 import type { MapOptions, MapType } from "./types";
+export { registerMapData } from "./config";
 /**
  * Creates an SVG map string for the specified map type
  *
- * @param mapType - Type of map to generate ('afghanistan' | 'world')
+ * @param mapType - Type of map to generate
+ *   - `'world'`: Always available ✅
+ *   - `'afghanistan'`: Optional - requires registration via `npx add-map afghanistan` ⚙️
  * @param options - Optional styling configuration for the map
  * @returns Complete SVG string representing the map
  *

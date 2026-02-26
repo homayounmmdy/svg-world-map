@@ -1,4 +1,5 @@
 import { DEFAULT_MAP_OPTIONS, MAP_DATA_REGISTRY, SVG_VIEWPORT_CONFIGS } from "./config";
+export { registerMapData } from "./config";
 /**
  * Type guard to check if region has multiple paths
  */
@@ -96,7 +97,9 @@ const generateRegionPaths = (mapData, options = {}) => {
 /**
  * Creates an SVG map string for the specified map type
  *
- * @param mapType - Type of map to generate ('afghanistan' | 'world')
+ * @param mapType - Type of map to generate
+ *   - `'world'`: Always available ✅
+ *   - `'afghanistan'`: Optional - requires registration via `npx add-map afghanistan` ⚙️
  * @param options - Optional styling configuration for the map
  * @returns Complete SVG string representing the map
  *
@@ -119,6 +122,17 @@ const generateRegionPaths = (mapData, options = {}) => {
 export const createMap = (mapType, options = {}) => {
     const mapData = MAP_DATA_REGISTRY[mapType];
     if (!mapData) {
+        // ✨ Super helpful error for optional maps
+        if (mapType === 'afghanistan') {
+            throw new Error(`Map "${mapType}" is not registered.\n\n` +
+                `💡 This map is optional to keep bundle size small.\n` +
+                `✅ To use it, run:\n` +
+                `   npx add-map afghanistan\n\n` +
+                `📝 Then register it in your code:\n` +
+                `   import { registerMapData } from 'svg-world-maps';\n` +
+                `   import afghanistanData from './src/maps/AF';\n` +
+                `   registerMapData('afghanistan', afghanistanData);`);
+        }
         throw new Error(`Map type "${mapType}" not found in registry`);
     }
     const viewportConfig = SVG_VIEWPORT_CONFIGS[mapType].getConfig(options.size || 'lg');

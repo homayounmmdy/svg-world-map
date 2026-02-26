@@ -1,14 +1,17 @@
 import type {MapOptions, MapSize} from "./types";
-import AF from "./maps/AF";
 import World from "./maps/World";
 
 /**
  * Map data registry containing all available map configurations
  */
 export const MAP_DATA_REGISTRY = {
-    afghanistan: AF,
-    world: World
+    world: World,
+    afghanistan: undefined,
 } as const;
+
+export const registerMapData = (type: string, data: any) => {
+    (MAP_DATA_REGISTRY as any)[type] = data;
+};
 
 /**
  * Base viewport configuration for each map type

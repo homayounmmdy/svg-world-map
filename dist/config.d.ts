@@ -3,16 +3,6 @@ import type { MapOptions, MapSize } from "./types";
  * Map data registry containing all available map configurations
  */
 export declare const MAP_DATA_REGISTRY: {
-    readonly afghanistan: {
-        name: string;
-        code: string;
-        viewBox: string;
-        states: {
-            code: string;
-            path: string;
-            name: string;
-        }[];
-    };
     readonly world: {
         name: string;
         code: string;
@@ -38,7 +28,9 @@ export declare const MAP_DATA_REGISTRY: {
             paths?: never;
         })[];
     };
+    readonly afghanistan: undefined;
 };
+export declare const registerMapData: (type: string, data: any) => void;
 /**
  * Base viewport configuration for each map type
  * These are the original/optimal dimensions for each map

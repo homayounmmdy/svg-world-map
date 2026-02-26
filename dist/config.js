@@ -1,11 +1,13 @@
-import AF from "./maps/AF";
 import World from "./maps/World";
 /**
  * Map data registry containing all available map configurations
  */
 export const MAP_DATA_REGISTRY = {
-    afghanistan: AF,
-    world: World
+    world: World,
+    afghanistan: undefined,
+};
+export const registerMapData = (type, data) => {
+    MAP_DATA_REGISTRY[type] = data;
 };
 /**
  * Base viewport configuration for each map type
