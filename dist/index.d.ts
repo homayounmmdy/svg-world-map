@@ -7,15 +7,18 @@ import type { MapOptions, MapType } from "./types";
  * @returns Complete SVG string representing the map
  *
  * @example
- * // Create a world map with custom colors
+ * // Create a world map with custom colors and size
  * const worldMap = createMap('world', {
  *   background: '#e6f3ff',
- *   borders: '#2c3e50'
+ *   borders: '#2c3e50',
+ *   size: 'xl'
  * });
  *
  * @example
- * // Create Afghanistan map with default styling
- * const afghanMap = createMap('afghanistan');
+ * // Create Afghanistan map at 50% scale
+ * const afghanMap = createMap('afghanistan', {
+ *   size: 0.5
+ * });
  *
  * @throws {Error} If the map type is not found in the registry
  */

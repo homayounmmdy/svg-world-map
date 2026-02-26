@@ -101,15 +101,18 @@ const generateRegionPaths = (mapData, options = {}) => {
  * @returns Complete SVG string representing the map
  *
  * @example
- * // Create a world map with custom colors
+ * // Create a world map with custom colors and size
  * const worldMap = createMap('world', {
  *   background: '#e6f3ff',
- *   borders: '#2c3e50'
+ *   borders: '#2c3e50',
+ *   size: 'xl'
  * });
  *
  * @example
- * // Create Afghanistan map with default styling
- * const afghanMap = createMap('afghanistan');
+ * // Create Afghanistan map at 50% scale
+ * const afghanMap = createMap('afghanistan', {
+ *   size: 0.5
+ * });
  *
  * @throws {Error} If the map type is not found in the registry
  */
@@ -118,7 +121,7 @@ export const createMap = (mapType, options = {}) => {
     if (!mapData) {
         throw new Error(`Map type "${mapType}" not found in registry`);
     }
-    const viewportConfig = SVG_VIEWPORT_CONFIGS[mapType];
+    const viewportConfig = SVG_VIEWPORT_CONFIGS[mapType].getConfig(options.size || 'lg');
     return `<svg 
     xmlns="http://www.w3.org/2000/svg" 
     height="${viewportConfig.height}" 
