@@ -14,6 +14,13 @@ declare const World: {
             d: string;
         }[];
         path?: never;
+    } | {
+        code: string;
+        name: string;
+        path: {
+            d: string;
+        }[];
+        paths?: never;
     })[];
 };
 export default World;

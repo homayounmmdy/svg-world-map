@@ -29,6 +29,13 @@ export declare const MAP_DATA_REGISTRY: {
                 d: string;
             }[];
             path?: never;
+        } | {
+            code: string;
+            name: string;
+            path: {
+                d: string;
+            }[];
+            paths?: never;
         })[];
     };
 };
