@@ -61,6 +61,8 @@ const generateRegionPaths = (mapData, options = {}) => {
             .map((region) => {
             const commonAttrs = `
                 id="${region.code}"
+                data-code="${region.code}"
+                data-name="${region.name}"
                 fill="${mergedOptions.background}"
                 stroke="${mergedOptions.borders}"
             `;
