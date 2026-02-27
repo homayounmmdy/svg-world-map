@@ -149,5 +149,6 @@ export const SVG_VIEWPORT_CONFIGS = {
 export const DEFAULT_MAP_OPTIONS: Required<MapOptions> = {
     background: '#f0f0f0',
     borders: '#333333',
-    size : 'lg'
+    hoverColor: '#d0e0ff',
+    size : 'lg',
 };

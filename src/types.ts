@@ -50,6 +50,8 @@ export type MapOptions = {
      * @default 'lg' (original size)
      */
     size?: MapSize;
+
+    hoverColor?: string;
 }
 
 /**

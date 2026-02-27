@@ -48,6 +48,7 @@ export type MapOptions = {
      * @default 'lg' (original size)
      */
     size?: MapSize;
+    hoverColor?: string;
 };
 /**
  * Represents the possible size values for map rendering

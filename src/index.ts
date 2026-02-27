@@ -1,6 +1,7 @@
 import type {MapData, MapOptions, MapRegion, MapType, PathData} from "./types";
 import {DEFAULT_MAP_OPTIONS, MAP_DATA_REGISTRY, SVG_VIEWPORT_CONFIGS} from "./config";
-export { registerMapData } from "./config";
+
+export {registerMapData} from "./config";
 
 /**
  * Type guard to check if region has multiple paths
@@ -45,38 +46,49 @@ const generateRegionPaths = (mapData: MapData, options: MapOptions = {}): string
         ...DEFAULT_MAP_OPTIONS,
         ...options
     };
-    const regions = mapData.states || mapData.countries || [];
 
     try {
         const regions = extractRegions(mapData);
+        const hoverStyles = regions
+            .map(region => `#${region.code}:hover`)
+            .join(', ');
+
+        const styleBlock = `
+        <style>
+            ${hoverStyles} {
+                fill: ${mergedOptions.hoverColor} !important;
+                transition: fill 0.2s ease;
+                cursor: pointer;
+            }
+        </style>
+    `;
 
         if (regions.length === 0) {
             console.warn('No regions found in map data');
             return '';
         }
 
-        return regions
+        const paths = regions
             .map((region: MapRegion) => {
+                const commonAttrs = `
+                id="${region.code}"
+                fill="${mergedOptions.background}"
+                stroke="${mergedOptions.borders}"
+            `;
                 // Handle regions with multiple paths (like Angola)
                 if (hasMultiplePaths(region)) {
                     return region.paths
                         .map((pathData: PathData, index: number) => {
-                            // First path gets the full attributes
+
                             if (index === 0) {
                                 return `<path 
                                 d="${pathData.d}" 
-                                id="${region.code}"
+                                ${commonAttrs}
                                 name="${region.name}"
-                                fill="${mergedOptions.background}"
-                                stroke="${mergedOptions.borders}"
                             />`;
                             }
-                            // Additional paths just get the d attribute
                             return `<path 
-                                d="${pathData.d}" 
-                                id="${region.code}"
-                                fill="${mergedOptions.background}"
-                                stroke="${mergedOptions.borders}"
+                                d="${pathData.d}" ${commonAttrs}
                                 />`;
                         })
                         .join('');
@@ -84,21 +96,20 @@ const generateRegionPaths = (mapData: MapData, options: MapOptions = {}): string
 
                 // Handle single path regions
                 if (hasSinglePath(region)) {
-                return `<path 
+                    return `<path 
                 d="${region.path}" 
-                id="${region.code}"
+                ${commonAttrs}
                 name="${region.name}"
-                fill="${mergedOptions.background}"
-                stroke="${mergedOptions.borders}"
             />`;
                 }
 
-                // This should never happen with proper typing, but just in case
                 console.warn(`Region has no valid path data`, region);
                 return '';
             })
-            .filter(Boolean) // Remove empty strings
+            .filter(Boolean)
             .join('');
+
+        return styleBlock + paths;
     } catch (error) {
         console.error('Error generating region paths:', error);
         throw error;
