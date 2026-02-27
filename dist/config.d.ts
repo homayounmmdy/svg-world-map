@@ -29,6 +29,7 @@ export declare const MAP_DATA_REGISTRY: {
         })[];
     };
     readonly afghanistan: undefined;
+    readonly usa: undefined;
 };
 export declare const registerMapData: (type: string, data: any) => void;
 /**
@@ -40,6 +41,12 @@ export declare const BASE_VIEWPORT_CONFIGS: {
         readonly height: 457.2;
         readonly width: 600;
         readonly viewBox: "0 0 600 457.2";
+        readonly aspectRatio: number;
+    };
+    readonly usa: {
+        readonly height: 589;
+        readonly width: 1000;
+        readonly viewBox: "0 0 1000 589";
         readonly aspectRatio: number;
     };
     readonly world: {
@@ -93,19 +100,32 @@ export declare const SIZE_PRESETS: {
  * @param size - Size variant or custom size
  * @returns Calculated width and height
  */
-export declare const calculateViewportDimensions: (baseConfig: typeof BASE_VIEWPORT_CONFIGS.afghanistan | typeof BASE_VIEWPORT_CONFIGS.world, size?: MapSize) => {
+export declare const calculateViewportDimensions: (baseConfig: typeof BASE_VIEWPORT_CONFIGS.afghanistan | typeof BASE_VIEWPORT_CONFIGS.usa | typeof BASE_VIEWPORT_CONFIGS.world, size?: MapSize) => {
     width: number;
     height: number;
 };
 /**
- * Generate viewport style string
- */
-export declare const generateViewportStyle: (dimensions: {
-    width: number;
-    height: number;
-}, baseStyle?: string) => string;
-/**
- * SVG viewport configurations for each map type with size variants
+ * Registry of viewport configurations for all supported maps.
+ *
+ * Each entry provides:
+ * - `base`: The raw viewport configuration (viewBox, aspect ratio, etc.)
+ * - `getConfig(size?)`: A method to compute responsive SVG dimensions
+ *
+ * @example
+ * // Get dimensions for a large USA map
+ * const usaDims = SVG_VIEWPORT_CONFIGS.usa.getConfig('lg');
+ * // { height: "600", width: "900" }
+ *
+ * @example
+ * // Use in SVG generation
+ * const config = SVG_VIEWPORT_CONFIGS[mapType];
+ * const { width, height } = config.getConfig(options.size);
+ *
+ * @remarks
+ * - The `world` map is always included by default
+ * - Optional maps (e.g., 'usa', 'afghanistan') must be registered
+ *   via `registerMapData()` before use
+ * - All dimensions are returned as strings for direct use in SVG attributes
  */
 export declare const SVG_VIEWPORT_CONFIGS: {
     readonly afghanistan: {
@@ -114,15 +134,12 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly width: 600;
             readonly viewBox: "0 0 600 457.2";
             readonly aspectRatio: number;
-        };
-        readonly getConfig: (size?: MapSize) => {
-            height: string;
-            width: string;
-            style: string;
-        };
-    };
-    readonly world: {
-        readonly base: {
+        } | {
+            readonly height: 589;
+            readonly width: 1000;
+            readonly viewBox: "0 0 1000 589";
+            readonly aspectRatio: number;
+        } | {
             readonly height: 857;
             readonly width: 2000;
             readonly viewBox: "0 0 2000 857";
@@ -131,7 +148,50 @@ export declare const SVG_VIEWPORT_CONFIGS: {
         readonly getConfig: (size?: MapSize) => {
             height: string;
             width: string;
-            style: string;
+        };
+    };
+    readonly usa: {
+        readonly base: {
+            readonly height: 457.2;
+            readonly width: 600;
+            readonly viewBox: "0 0 600 457.2";
+            readonly aspectRatio: number;
+        } | {
+            readonly height: 589;
+            readonly width: 1000;
+            readonly viewBox: "0 0 1000 589";
+            readonly aspectRatio: number;
+        } | {
+            readonly height: 857;
+            readonly width: 2000;
+            readonly viewBox: "0 0 2000 857";
+            readonly aspectRatio: number;
+        };
+        readonly getConfig: (size?: MapSize) => {
+            height: string;
+            width: string;
+        };
+    };
+    readonly world: {
+        readonly base: {
+            readonly height: 457.2;
+            readonly width: 600;
+            readonly viewBox: "0 0 600 457.2";
+            readonly aspectRatio: number;
+        } | {
+            readonly height: 589;
+            readonly width: 1000;
+            readonly viewBox: "0 0 1000 589";
+            readonly aspectRatio: number;
+        } | {
+            readonly height: 857;
+            readonly width: 2000;
+            readonly viewBox: "0 0 2000 857";
+            readonly aspectRatio: number;
+        };
+        readonly getConfig: (size?: MapSize) => {
+            height: string;
+            width: string;
         };
     };
 };

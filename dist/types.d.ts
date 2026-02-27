@@ -48,6 +48,30 @@ export type MapOptions = {
      * @default 'lg' (original size)
      */
     size?: MapSize;
+    /**
+     * Color applied to map regions when hovered by the user.
+     *
+     * @remarks
+     * - Requires CSS/JS hover handling to be implemented in your renderer
+     * - Supports any valid CSS color format:
+     *   • Named colors: `'red'`, `'blue'`, `'transparent'`
+     *   • Hex: `'#ff0000'`, `'#f00'`
+     *   • RGB/RGBA: `'rgb(255, 0, 0)'`, `'rgba(255, 0, 0, 0.5)'`
+     *   • HSL/HSLA: `'hsl(0, 100%, 50%)'`, `'hsla(0, 100%, 50%, 0.3)'`
+     * - If not provided, regions will use default color on hover
+     *
+     * @example
+     * // Simple named color
+     * { hoverColor: 'lightblue' }
+     *
+     * @example
+     * // Semi-transparent highlight
+     * { hoverColor: 'rgba(0, 123, 255, 0.4)' }
+     *
+     * @example
+     * // Using CSS custom property (if supported by your renderer)
+     * { hoverColor: 'var(--map-hover-color)' }
+     */
     hoverColor?: string;
 };
 /**
@@ -92,15 +116,16 @@ export type MapOptions = {
  * createMap('world', { size: '2xl' })
  *
  * // Custom size for specific layout
- * createMap('afghanistan', { size: 0.65 }) // 65% of original
+ * createMap('usa', { size: 0.65 }) // 65% of original
  */
 export type MapSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | number;
 /**
  * Supported map types
  * - 'afghanistan': Detailed map of Afghanistan with provinces/states
+ * - 'usa': Detailed map of usa with provinces/states
  * - 'world': World map with all countries
  */
-export type MapType = 'afghanistan' | 'world';
+export type MapType = 'afghanistan' | 'usa' | 'world';
 /**
  * Represents a single path within a region
  */
@@ -132,7 +157,7 @@ export type MapRegion = {
 export type MapData = {
     /** SVG viewBox attribute value */
     viewBox: string;
-    /** States/provinces for country maps (like Afghanistan) */
+    /** States/provinces for country maps (like usa) */
     states?: MapRegion[];
     /** Countries for world maps */
     countries?: MapRegion[];

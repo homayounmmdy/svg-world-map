@@ -1,6 +1,6 @@
 {
   "name": "svg-world-maps",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "World map SVG for any JavaScript framework",
   "type": "module",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
     "dist",
     "README.md",
     "LICENSE",
-    "src/maps/optional/AF.ts",
+    "src/maps/optional/**/*.ts",
     "scripts/add-map.js"
   ],
   "bin": {
@@ -25,6 +25,7 @@
     "world-maps",
     "svg-map",
     "afghanistan",
+    "usa",
     "country-maps"
   ],
   "author": "Homayoun Mohammadi",

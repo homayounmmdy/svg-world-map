@@ -5,6 +5,7 @@ import World from "./maps/World";
 export const MAP_DATA_REGISTRY = {
     world: World,
     afghanistan: undefined,
+    usa: undefined
 };
 export const registerMapData = (type, data) => {
     MAP_DATA_REGISTRY[type] = data;
@@ -19,6 +20,12 @@ export const BASE_VIEWPORT_CONFIGS = {
         width: 600,
         viewBox: "0 0 600 457.2",
         aspectRatio: 600 / 457.2
+    },
+    usa: {
+        height: 589,
+        width: 1000,
+        viewBox: "0 0 1000 589",
+        aspectRatio: 1000 / 589
     },
     world: {
         height: 857,
@@ -94,37 +101,66 @@ export const calculateViewportDimensions = (baseConfig, size = 'lg') => {
     };
 };
 /**
- * Generate viewport style string
+ * Creates a viewport configuration object for a specific map.
+ *
+ * This factory function generates a consistent config structure that includes:
+ * - The base viewport settings from BASE_VIEWPORT_CONFIGS
+ * - A getConfig method that calculates responsive dimensions based on size
+ *
+ * @param mapKey - The key identifying which map's base config to use
+ *                 (must be a key of BASE_VIEWPORT_CONFIGS)
+ * @returns An object containing:
+ *   - `base`: The original viewport configuration for the map
+ *   - `getConfig`: A function that accepts a MapSize and returns
+ *                  height/width as strings for SVG attributes
+ *
+ * @example
+ * const usaConfig = createMapViewportConfig('usa');
+ * const dimensions = usaConfig.getConfig('xl');
+ * // Returns: { height: "600", width: "900" }
+ *
+ * @internal This function is used to generate SVG_VIEWPORT_CONFIGS
  */
-export const generateViewportStyle = (dimensions, baseStyle = "") => {
-    return `width: ${dimensions.width}px; height: ${dimensions.height}px; ${baseStyle}`.trim();
+const createMapViewportConfig = (mapKey) => {
+    const base = BASE_VIEWPORT_CONFIGS[mapKey];
+    return {
+        base,
+        getConfig: (size = 'lg') => {
+            const dimensions = calculateViewportDimensions(base, size);
+            return {
+                height: dimensions.height.toString(),
+                width: dimensions.width.toString(),
+            };
+        }
+    };
 };
 /**
- * SVG viewport configurations for each map type with size variants
+ * Registry of viewport configurations for all supported maps.
+ *
+ * Each entry provides:
+ * - `base`: The raw viewport configuration (viewBox, aspect ratio, etc.)
+ * - `getConfig(size?)`: A method to compute responsive SVG dimensions
+ *
+ * @example
+ * // Get dimensions for a large USA map
+ * const usaDims = SVG_VIEWPORT_CONFIGS.usa.getConfig('lg');
+ * // { height: "600", width: "900" }
+ *
+ * @example
+ * // Use in SVG generation
+ * const config = SVG_VIEWPORT_CONFIGS[mapType];
+ * const { width, height } = config.getConfig(options.size);
+ *
+ * @remarks
+ * - The `world` map is always included by default
+ * - Optional maps (e.g., 'usa', 'afghanistan') must be registered
+ *   via `registerMapData()` before use
+ * - All dimensions are returned as strings for direct use in SVG attributes
  */
 export const SVG_VIEWPORT_CONFIGS = {
-    afghanistan: {
-        base: BASE_VIEWPORT_CONFIGS.afghanistan,
-        getConfig: (size = 'lg') => {
-            const dimensions = calculateViewportDimensions(BASE_VIEWPORT_CONFIGS.afghanistan, size);
-            return {
-                height: dimensions.height.toString(),
-                width: dimensions.width.toString(),
-                style: `overflow: hidden; position: relative; width: ${dimensions.width}px; height: ${dimensions.height}px;`
-            };
-        }
-    },
-    world: {
-        base: BASE_VIEWPORT_CONFIGS.world,
-        getConfig: (size = 'lg') => {
-            const dimensions = calculateViewportDimensions(BASE_VIEWPORT_CONFIGS.world, size);
-            return {
-                height: dimensions.height.toString(),
-                width: dimensions.width.toString(),
-                style: `width: ${dimensions.width}px; height: ${dimensions.height}px;`
-            };
-        }
-    }
+    afghanistan: createMapViewportConfig('afghanistan'),
+    usa: createMapViewportConfig('usa'),
+    world: createMapViewportConfig('world'),
 };
 /**
  * Default styling options for map regions

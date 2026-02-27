@@ -124,6 +124,7 @@ const generateRegionPaths = (mapData: MapData, options: MapOptions = {}): string
  * @param mapType - Type of map to generate
  *   - `'world'`: Always available ✅
  *   - `'afghanistan'`: Optional - requires registration via `npx add-map afghanistan` ⚙️
+ *   - `'usa'`: Optional - requires registration via `npx add-map usa` ⚙️
  * @param options - Optional styling configuration for the map
  * @returns Complete SVG string representing the map
  *
@@ -149,16 +150,18 @@ export const createMap = (mapType: MapType, options: MapOptions = {}): string =>
 
     if (!mapData) {
         // ✨ Super helpful error for optional maps
-        if (mapType === 'afghanistan') {
+        if (mapType.toLowerCase() !== 'world') {
+                    const safeVarName = `${mapType.replace(/[^a-zA-Z0-9]/g, '_')}Data`;
+            const importPath = `./src/maps/${mapType}`;
             throw new Error(
                 `Map "${mapType}" is not registered.\n\n` +
                 `💡 This map is optional to keep bundle size small.\n` +
-                `✅ To use it, run:\n` +
-                `   npx add-map afghanistan\n\n` +
+                `✅ To add it, run:\n` +
+                `   npx add-map ${mapType}\n\n` +
                 `📝 Then register it in your code:\n` +
                 `   import { registerMapData } from 'svg-world-maps';\n` +
-                `   import afghanistanData from './src/maps/AF';\n` +
-                `   registerMapData('afghanistan', afghanistanData);`
+                `   import ${safeVarName} from '${importPath}';\n` +
+                `   registerMapData('${mapType}', ${safeVarName});`
             );
         }
 
@@ -171,7 +174,6 @@ export const createMap = (mapType: MapType, options: MapOptions = {}): string =>
     xmlns="http://www.w3.org/2000/svg" 
     height="${viewportConfig.height}" 
     width="${viewportConfig.width}"
-    style="${viewportConfig.style}"
     viewBox="${mapData.viewBox}"
     preserveAspectRatio="xMidYMid meet">
         ${generateRegionPaths(mapData as MapData, options)}

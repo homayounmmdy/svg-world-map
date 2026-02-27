@@ -1,4 +1,4 @@
-const AF = {
+const AFGHANISTAN = {
   name: "Afghanistan",
   code: "AF",
   viewBox: "0 0 1000 762",
@@ -177,4 +177,4 @@ const AF = {
   ],
 };
 
-export default AF;
+export default AFGHANISTAN;

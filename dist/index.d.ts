@@ -6,6 +6,7 @@ export { registerMapData } from "./config";
  * @param mapType - Type of map to generate
  *   - `'world'`: Always available ✅
  *   - `'afghanistan'`: Optional - requires registration via `npx add-map afghanistan` ⚙️
+ *   - `'usa'`: Optional - requires registration via `npx add-map usa` ⚙️
  * @param options - Optional styling configuration for the map
  * @returns Complete SVG string representing the map
  *
