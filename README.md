@@ -4,9 +4,14 @@ Simple, lightweight SVG maps for JavaScript projects.
 
 🎉 **Now with World Map and Flexible Sizing!**
 
+> 📚 **Documentation**: [Wiki Home](https://github.com/homayounmmdy/svg-world-maps/wiki) • [Getting Started](https://github.com/homayounmmdy/svg-world-maps/wiki/Getting-Started) • [Optional Maps (v0.3.0)](https://github.com/homayounmmdy/svg-world-maps/wiki/Optional-Maps)  
+> 💬 **Community**: [Discussions](https://github.com/homayounmmdy/svg-world-maps/discussions) • [Report Issue](https://github.com/homayounmmdy/svg-world-maps/issues)
+
+---
+
 ## Features
 
-- 🌍 **Multiple Maps**: Afghanistan (v0.1.0) and World map with all 195 countries
+- 🌍 **Multiple Maps**: World map with all 195 countries + optional detailed maps (like Afghanistan)
 - 📏 **Flexible Sizing**: 8 preset sizes + custom scale factors
 - 🎨 **Customizable**: Background colors, border colors, and more
 - ⚡ **Zero dependencies**: Pure SVG output
@@ -19,6 +24,10 @@ Simple, lightweight SVG maps for JavaScript projects.
 ```bash
 npm install svg-world-maps
 ```
+
+> 💡 **v0.3.0 Note**: The Afghanistan map is now **optional** to keep your bundle small.  
+> Want to use it? Run: `npx add-map afghanistan`  
+> [Learn more →](https://github.com/homayounmmdy/svg-world-maps/wiki/Optional-Maps)
 
 ## Usage
 
@@ -35,12 +44,6 @@ const App = () => {
     size: "lg"               // Size preset: xs, sm, md, lg, xl, 2xl, 3xl, 4xl
   });
 
-  // Create an Afghanistan map with custom size
-  const afghanistanMap = createMap("afghanistan", {
-    background: "#ff0000",
-    borders: "#ffffff",
-    size: 1.5  // Custom scale factor (150% of original)
-  });
 
   return (
     <div dangerouslySetInnerHTML={{ __html: worldMap }} />
@@ -78,6 +81,8 @@ Creates an SVG map string.
 |-----------|------|-------------|---------|
 | `mapType` | `string` | Type of map to generate | `"world"`, `"afghanistan"` |
 | `options` | `object` | Configuration options | See below |
+
+*\* `afghanistan` requires optional map setup — [see guide](https://github.com/homayounmmdy/svg-world-maps/wiki/Optional-Maps)*
 
 #### Options
 
@@ -119,7 +124,7 @@ Use any number for precise control:
 // World map with default settings
 createMap("world");
 
-// Afghanistan map with custom colors
+// Afghanistan map with custom colors (requires optional setup)
 createMap("afghanistan", {
   background: "#27ae60",
   borders: "#ecf0f1"
@@ -167,15 +172,24 @@ const Maps = () => {
 
 ## Available Maps
 
-| Map | Type | Description | Since |
-|-----|------|-------------|-------|
-| `"world"` | 🌍 | Complete world map with all 195 countries | v0.2.0 |
-| `"afghanistan"` | 🗺️ | Afghanistan map with 34 provinces | v0.1.0 |
+| Map | Type | Description | Since | Status |
+|-----|------|-------------|-------|--------|
+| `"world"` | 🌍 | Complete world map with all 195 countries | v0.2.0 | ✅ Included by default |
+| `"afghanistan"` | 🗺️ | Afghanistan map with 34 provinces | v0.1.0 | 🔁 Optional (v0.3.0+) |
+
+> 🔁 **Optional maps** keep your bundle small. Add them only when needed:  
+> ```bash
+> npx add-map afghanistan
+> ```  
+> [Full setup guide →](https://github.com/homayounmmdy/svg-world-maps/wiki/Optional-Maps)
+
+---
 
 ## Roadmap
 
 - [x] Afghanistan map (v0.1.0)
 - [x] World map (v0.2.0)
+- [x] Optional maps system (v0.3.0)
 - [ ] Individual country maps
 - [ ] Hover effects and tooltips
 - [ ] Click handlers and callbacks
@@ -202,6 +216,36 @@ const map = createMap("afghanistan", {
   size: "lg" 
 });
 ```
+
+### From v0.2.x to v0.3.0 (Optional Maps)
+
+If you use the Afghanistan map:
+
+```bash
+# 1. Add the optional map to your project
+npx add-map afghanistan
+
+# 2. Register it in your code
+import { registerMapData } from "svg-world-maps";
+import afData from "./src/maps/AF";
+registerMapData("afghanistan", afData);
+```
+
+[Full migration guide →](https://github.com/homayounmmdy/svg-world-maps/wiki/Migration)
+
+---
+
+## 📚 Documentation & Support
+
+| Resource | Link |
+|----------|------|
+| 🏠 **Wiki Home** | [github.com/homayounmmdy/svg-world-maps/wiki](https://github.com/homayounmmdy/svg-world-maps/wiki) |
+| 🚀 **Getting Started** | [Quick start guide](https://github.com/homayounmmdy/svg-world-maps/wiki/Getting-Started) |
+| 🗺️ **Optional Maps** | [Add Afghanistan & more](https://github.com/homayounmmdy/svg-world-maps/wiki/Optional-Maps) |
+| 💬 **Discussions** | [Ask questions & share ideas](https://github.com/homayounmmdy/svg-world-maps/discussions) |
+| 🐛 **Report Issue** | [Open a bug report](https://github.com/homayounmmdy/svg-world-maps/issues) |
+
+---
 
 ## Contributing
 
