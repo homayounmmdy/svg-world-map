@@ -41,12 +41,9 @@ const generateRegionPaths = (mapData, options = {}) => {
     };
     try {
         const regions = extractRegions(mapData);
-        const hoverStyles = regions
-            .map(region => `#${region.code}:hover`)
-            .join(', ');
         const styleBlock = `
         <style>
-            ${hoverStyles} {
+            .regions:hover {
                 fill: ${mergedOptions.hoverColor} !important;
                 transition: fill 0.2s ease;
                 cursor: pointer;
@@ -63,6 +60,7 @@ const generateRegionPaths = (mapData, options = {}) => {
                 id="${region.code}"
                 data-code="${region.code}"
                 data-name="${region.name}"
+                class="regions"
                 fill="${mergedOptions.background}"
                 stroke="${mergedOptions.borders}"
             `;
