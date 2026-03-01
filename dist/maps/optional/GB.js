@@ -1,7 +1,7 @@
 const GB = {
     name: "Great British",
     code: "GB",
-    viewBox: "0 0 1000 589",
+    viewBox: "0 0 1000 1000",
     states: [
         {
             name: "Derry",

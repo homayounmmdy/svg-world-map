@@ -70,9 +70,9 @@ export declare const BASE_VIEWPORT_CONFIGS: {
         readonly aspectRatio: number;
     };
     readonly gb: {
-        readonly height: 589;
+        readonly height: 1000;
         readonly width: 1000;
-        readonly viewBox: "0 0 1000 589";
+        readonly viewBox: "0 0 1000 1000";
         readonly aspectRatio: number;
     };
     readonly germany: {
@@ -206,9 +206,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;
@@ -268,9 +268,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;
@@ -330,9 +330,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;
@@ -392,9 +392,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;
@@ -454,9 +454,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;
@@ -516,9 +516,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;
@@ -578,9 +578,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;
@@ -640,9 +640,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;
@@ -702,9 +702,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;
@@ -764,9 +764,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;
@@ -826,9 +826,9 @@ export declare const SVG_VIEWPORT_CONFIGS: {
             readonly viewBox: "0 0 1000 960";
             readonly aspectRatio: number;
         } | {
-            readonly height: 589;
+            readonly height: 1000;
             readonly width: 1000;
-            readonly viewBox: "0 0 1000 589";
+            readonly viewBox: "0 0 1000 1000";
             readonly aspectRatio: number;
         } | {
             readonly height: 1000;

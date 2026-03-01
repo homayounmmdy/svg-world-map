@@ -48,10 +48,10 @@ export const BASE_VIEWPORT_CONFIGS = {
         aspectRatio: 1000 / 960
     },
     gb: {
-        height: 589,
+        height: 1000,
         width: 1000,
-        viewBox: "0 0 1000 589",
-        aspectRatio: 1000 / 589
+        viewBox: "0 0 1000 1000",
+        aspectRatio: 1000 / 1000
     },
     germany: {
         height: 1000,
