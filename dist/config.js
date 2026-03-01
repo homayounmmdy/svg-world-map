@@ -5,6 +5,14 @@ import World from "./maps/World";
 export const MAP_DATA_REGISTRY = {
     world: World,
     afghanistan: undefined,
+    australia: undefined,
+    brazil: undefined,
+    france: undefined,
+    gb: undefined,
+    germany: undefined,
+    india: undefined,
+    iran: undefined,
+    netherlands: undefined,
     usa: undefined
 };
 export const registerMapData = (type, data) => {
@@ -20,6 +28,54 @@ export const BASE_VIEWPORT_CONFIGS = {
         width: 600,
         viewBox: "0 0 600 457.2",
         aspectRatio: 600 / 457.2
+    },
+    australia: {
+        height: 966,
+        width: 1000,
+        viewBox: "0 0 1000 966",
+        aspectRatio: 1000 / 966
+    },
+    brazil: {
+        height: 912,
+        width: 1000,
+        viewBox: "0 0 1000 912",
+        aspectRatio: 1000 / 912
+    },
+    france: {
+        height: 960,
+        width: 1000,
+        viewBox: "0 0 1000 960",
+        aspectRatio: 1000 / 960
+    },
+    gb: {
+        height: 589,
+        width: 1000,
+        viewBox: "0 0 1000 589",
+        aspectRatio: 1000 / 589
+    },
+    germany: {
+        height: 1000,
+        width: 1000,
+        viewBox: "0 0 1000 1000",
+        aspectRatio: 1000 / 1000
+    },
+    india: {
+        height: 1000,
+        width: 1000,
+        viewBox: "0 0 1000 1000",
+        aspectRatio: 1000 / 1000
+    },
+    iran: {
+        height: 593.71021,
+        width: 654.51147,
+        viewBox: "0 0 654.51147 593.71021",
+        aspectRatio: 654.51147 / 593.71021
+    },
+    netherlands: {
+        height: 1000,
+        width: 1000,
+        viewBox: "0 0 1000 1000",
+        aspectRatio: 1000 / 1000
     },
     usa: {
         height: 589,
@@ -159,6 +215,14 @@ const createMapViewportConfig = (mapKey) => {
  */
 export const SVG_VIEWPORT_CONFIGS = {
     afghanistan: createMapViewportConfig('afghanistan'),
+    australia: createMapViewportConfig('australia'),
+    brazil: createMapViewportConfig('brazil'),
+    france: createMapViewportConfig('france'),
+    gb: createMapViewportConfig('gb'),
+    germany: createMapViewportConfig('germany'),
+    india: createMapViewportConfig('india'),
+    iran: createMapViewportConfig('iran'),
+    netherlands: createMapViewportConfig('netherlands'),
     usa: createMapViewportConfig('usa'),
     world: createMapViewportConfig('world'),
 };

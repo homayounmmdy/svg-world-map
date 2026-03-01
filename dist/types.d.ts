@@ -122,10 +122,18 @@ export type MapSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' |
 /**
  * Supported map types
  * - 'afghanistan': Detailed map of Afghanistan with provinces/states
+ * - 'australia': Detailed map of australia with provinces/states
+ * - 'brazil': Detailed map of brazil with provinces/states
+ * - 'france': Detailed map of france with provinces/states
+ * - 'gb': Detailed map of gb with provinces/states
+ * - 'germany': Detailed map of germany with provinces/states
+ * - 'india': Detailed map of india with provinces/states
+ * - 'iran': Detailed map of iran with provinces/states
+ * - 'netherlands': Detailed map of netherlands with provinces/states
  * - 'usa': Detailed map of usa with provinces/states
  * - 'world': World map with all countries
  */
-export type MapType = 'afghanistan' | 'usa' | 'world';
+export type MapType = 'afghanistan' | 'australia' | 'brazil' | 'france' | 'gb' | 'germany' | 'india' | 'iran' | 'netherlands' | 'usa' | 'world';
 /**
  * Represents a single path within a region
  */

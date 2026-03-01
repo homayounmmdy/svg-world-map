@@ -6,6 +6,14 @@ export { registerMapData } from "./config";
  * @param mapType - Type of map to generate
  *   - `'world'`: Always available ✅
  *   - `'afghanistan'`: Optional - requires registration via `npx add-map afghanistan` ⚙️
+ *   - `'australia'`: Optional - requires registration via `npx add-map australia` ⚙️
+ *   - `'brazil'`: Optional - requires registration via `npx add-map brazil` ⚙️
+ *   - `'france'`: Optional - requires registration via `npx add-map france` ⚙️
+ *   - `'gb'`: Optional - requires registration via `npx add-map gb` ⚙️
+ *   - `'germany'`: Optional - requires registration via `npx add-map germany` ⚙️
+ *   - `'india'`: Optional - requires registration via `npx add-map india` ⚙️
+ *   - `'iran'`: Optional - requires registration via `npx add-map iran` ⚙️
+ *   - `'netherlands'`: Optional - requires registration via `npx add-map netherlands` ⚙️
  *   - `'usa'`: Optional - requires registration via `npx add-map usa` ⚙️
  * @param options - Optional styling configuration for the map
  * @returns Complete SVG string representing the map
