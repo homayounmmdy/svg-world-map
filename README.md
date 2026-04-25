@@ -2,14 +2,14 @@
 
 Simple, lightweight SVG maps for JavaScript projects.
 
-🎉 **Now with USA Map, Hover Effects & Click Support!**
+🎉 **Now with 8 Country Maps! Hover Effects & Click Support!**
 
 > 📚 **Documentation**: [Wiki Home](https://github.com/homayounmmdy/svg-world-maps/wiki) • [Getting Started](https://github.com/homayounmmdy/svg-world-maps/wiki/Getting-Started) • [Optional Maps](https://github.com/homayounmmdy/svg-world-maps/wiki/Optional-Maps)  
 > 💬 **Community**: [Discussions](https://github.com/homayounmmdy/svg-world-maps/discussions) • [Report Issue](https://github.com/homayounmmdy/svg-world-maps/issues)
 
 ## Features
 
-- 🌍 **Multiple Maps**: World map + optional detailed maps (USA, Afghanistan, and more)
+- 🌍 **Multiple Maps**: World map + 8 country maps (USA, Germany, India, Iran, Netherlands, France, Australia, Brazil, Great Britain, and more coming)
 - 📏 **Flexible Sizing**: 8 preset sizes + custom scale factors
 - 🎨 **Customizable**: Background, borders, and hover colors
 - 👆 **Interactive**: Click support via `data-code` and `data-name` attributes
@@ -21,13 +21,20 @@ Simple, lightweight SVG maps for JavaScript projects.
 ## Installation
 
 ```bash
-npm install svg-world-maps
+npm install svg-world-maps@0.5.0
 ```
 
 > 💡 **Optional Maps**: Keep your bundle small by only adding the maps you need.  
 > ```bash
 > npx add-map usa          # Add USA map
-> npx add-map afghanistan  # Add Afghanistan map
+> npx add-map germany      # Add Germany map
+> npx add-map india        # Add India map
+> npx add-map iran         # Add Iran map
+> npx add-map netherlands  # Add Netherlands map
+> npx add-map france       # Add France map
+> npx add-map australia    # Add Australia map
+> npx add-map brazil       # Add Brazil map
+> npx add-map gb           # Add Great Britain map
 > ```  
 > [Learn more →](https://github.com/homayounmmdy/svg-world-maps/wiki/Optional-Maps)
 
@@ -92,10 +99,10 @@ Creates an SVG map string.
 
 | Parameter | Type | Description | Options |
 |-----------|------|-------------|---------|
-| `mapType` | `string` | Type of map to generate | `"world"`, `"usa"`, `"afghanistan"` |
+| `mapType` | `string` | Type of map to generate | `"world"`, `"usa"`, `"germany"`, `"india"`, `"iran"`, `"netherlands"`, `"france"`, `"australia"`, `"brazil"`, `"gb"` |
 | `options` | `object` | Configuration options | See below |
 
-*\* Optional maps (`usa`, `afghanistan`) require setup via `npx add-map` — [see guide](https://github.com/homayounmmdy/svg-world-maps/wiki/Optional-Maps)*
+*\* Optional maps require setup via `npx add-map` — [see guide](https://github.com/homayounmmdy/svg-world-maps/wiki/Optional-Maps)*
 
 #### Options
 
@@ -140,8 +147,8 @@ Every region in the generated SVG includes two data attributes:
 
 | Attribute | Description | Example |
 |-----------|-------------|---------|
-| `data-code` | Short region identifier | `"US-CA"`, `"AF-KAB"`, `"FR"` |
-| `data-name` | Full region name | `"California"`, `"Kabul"`, `"France"` |
+| `data-code` | Short region identifier | `"US-CA"`, `"IN-MH"`, `"DE-BY"`, `"GB-ENG"` |
+| `data-name` | Full region name | `"California"`, `"Maharashtra"`, `"Bavaria"`, `"England"` |
 
 **React Example with Toast Notification:**
 
@@ -216,8 +223,18 @@ createMap("usa", {
   hoverColor: "rgba(59, 130, 246, 0.3)"
 });
 
-// Afghanistan map - extra small
-createMap("afghanistan", { size: "xs" });
+// Germany map - extra small
+createMap("germany", { size: "xs" });
+
+// India map with custom colors
+createMap("india", {
+  background: "#fff5e6",
+  borders: "#ff9933",
+  hoverColor: "rgba(255, 153, 51, 0.3)"
+});
+
+// Iran map - medium size
+createMap("iran", { size: "md" });
 
 // World map - custom scale with borders
 createMap("world", {
@@ -233,15 +250,19 @@ import { createMap } from "svg-world-maps";
 
 const Maps = () => {
   const world = createMap("world", { size: "sm", hoverColor: "lightgray" });
-  const usa = createMap("usa", { size: "md", hoverColor: "lightblue" });
+  const germany = createMap("germany", { size: "md", hoverColor: "lightblue" });
+  const india = createMap("india", { size: "md", hoverColor: "lightgreen" });
 
   return (
     <div>
       <h3>World Map</h3>
       <div dangerouslySetInnerHTML={{ __html: world }} />
       
-      <h3>USA Map</h3>
-      <div dangerouslySetInnerHTML={{ __html: usa }} />
+      <h3>Germany Map</h3>
+      <div dangerouslySetInnerHTML={{ __html: germany }} />
+      
+      <h3>India Map</h3>
+      <div dangerouslySetInnerHTML={{ __html: india }} />
     </div>
   );
 };
@@ -252,13 +273,28 @@ const Maps = () => {
 | Map | Type | Description | Since | Status |
 |-----|------|-------------|-------|--------|
 | `"world"` | 🌍 | Complete world map with all 195 countries | v0.2.0 | ✅ Included by default |
-| `"usa"` | 🇺🇸 | USA map with all 50 states + DC | v0.4.0 | 🔁 Optional |
 | `"afghanistan"` | 🗺️ | Afghanistan map with 34 provinces | v0.1.0 | 🔁 Optional |
+| `"usa"` | 🇺🇸 | USA map with all 50 states + DC | v0.4.0 | 🔁 Optional |
+| `"germany"` | 🇩🇪 | Germany map with 16 states | v0.5.0 | 🔁 Optional |
+| `"india"` | 🇮🇳 | India map with 28 states + 8 union territories | v0.5.0 | 🔁 Optional |
+| `"iran"` | 🇮🇷 | Iran map with 31 provinces | v0.5.0 | 🔁 Optional |
+| `"netherlands"` | 🇳🇱 | Netherlands map with 12 provinces | v0.5.0 | 🔁 Optional |
+| `"france"` | 🇫🇷 | France map with 18 regions | v0.5.0 | 🔁 Optional |
+| `"australia"` | 🇦🇺 | Australia map with 6 states + 10 territories | v0.5.0 | 🔁 Optional |
+| `"brazil"` | 🇧🇷 | Brazil map with 26 states + federal district | v0.5.0 | 🔁 Optional |
+| `"gb"` | 🇬🇧 | Great Britain map with constituent countries | v0.5.0 | 🔁 Optional |
 
 > 🔁 **Optional maps** keep your bundle small. Add them only when needed:  
 > ```bash
 > npx add-map usa
-> npx add-map afghanistan
+> npx add-map germany
+> npx add-map india
+> npx add-map iran
+> npx add-map netherlands
+> npx add-map france
+> npx add-map australia
+> npx add-map brazil
+> npx add-map gb
 > ```  
 > [Full setup guide →](https://github.com/homayounmmdy/svg-world-maps/wiki/Optional-Maps)
 
@@ -268,11 +304,30 @@ const Maps = () => {
 - [x] World map (v0.2.0)
 - [x] Optional maps system (v0.3.0)
 - [x] USA map + hoverColor + click support via data attributes (v0.4.0)
-- [ ] More country maps (Canada, Germany, UK, etc.)
+- [x] Germany, India, Iran, Netherlands, France, Australia, Brazil, Great Britain maps (v0.5.0)
+- [ ] More country maps (Canada, China, Japan, Mexico, etc.)
 - [ ] Keyboard navigation & accessibility improvements
 - [ ] Export to PNG/SVG file
 
 ## Migration Guide
+
+### From v0.4.0 to v0.5.0
+
+No breaking changes. New maps are optional additions.
+
+**To use new country maps:**
+```bash
+# Add any of the new maps
+npx add-map germany
+npx add-map india
+npx add-map iran
+# ... and more
+
+# Register in your code
+import { registerMapData } from "svg-world-maps";
+import germanyData from "./src/maps/germany";
+registerMapData("germany", germanyData);
+```
 
 ### From v0.1.0 to v0.2.0
 
